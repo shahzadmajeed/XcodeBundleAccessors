@@ -27,6 +27,13 @@ public enum SpmImageAsset: String, CaseIterable, AssetsResource {
         }
     }
     public var image: Image { Image(resource) }
-    public var uiImage: UIImage { UIImage(resource: resource) }
+    public var uiImage: UIImage {
+    #if SWIFT_PACKAGE
+        print("SPM Module: SWIFT_PACKAGE flag exists")
+    #else
+        print("SPM Module: SWIFT_PACKAGE flag does not exist")
+    #endif
+        return UIImage(resource: resource)
+    }
     public var displayName: String { rawValue }
 }

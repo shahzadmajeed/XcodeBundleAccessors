@@ -42,6 +42,13 @@ public enum AppImageAsset: String, CaseIterable, AssetsResource {
     }
     
     public var image: Image { Image(resource) }
-    public var uiImage: UIImage { UIImage(resource: resource) }
+    public var uiImage: UIImage {
+    #if SWIFT_PACKAGE
+        print("App Framework: SWIFT_PACKAGE flag exists")
+    #else
+        print("App Framework: SWIFT_PACKAGE flag does not exist")
+    #endif
+        return UIImage(resource: resource)
+    }
     public var displayName: String { rawValue }
 }
