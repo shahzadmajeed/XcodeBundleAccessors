@@ -5,6 +5,6 @@
       location = "container:../SpmPackage/DesignSystem">
    </FileRef>
    <FileRef
-      location = "container:XcodeBundleAccessors.xcodeproj">
+      location = "container:App.xcodeproj">
    </FileRef>
 </Workspace>

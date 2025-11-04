@@ -10,7 +10,7 @@ import DesignSystem
 
 // MARK: - App assets enumeration (manually maintained)
 // Update this list to match the exact names in AppAssets.xcassets.
-enum AppImageAsset: String, CaseIterable, AssetsResource {
+public enum AppImageAsset: String, CaseIterable, AssetsResource {
     case arrowDownDarkImage
     case arrowDownLightImage
     case arrowUpDarkImage

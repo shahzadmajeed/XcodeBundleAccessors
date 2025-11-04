@@ -7,6 +7,7 @@
 
 import UIKit
 import DesignSystem
+import Framework
 
 class ViewController: UIViewController {
 
@@ -14,22 +15,8 @@ class ViewController: UIViewController {
 
     private let cellIdentifier = "ArrowCell"
 
-    // Section model
-    private enum Section: Int, CaseIterable {
-        case appAssets = 0
-        case spmAssets
-
-        var title: String {
-            switch self {
-            case .appAssets: return "App Assets"
-            case .spmAssets: return "SPM Target Assets"
-            }
-        }
-    }
+    let viewModel = ViewModel()
     
-    private let appAssetItems: [AppImageAsset] = AppImageAsset.allCases
-    private let spmAssetItems: [SpmImageAsset] = SpmImageAsset.allCases
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,32 +40,32 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int { Section.allCases.count }
+    func numberOfSections(in tableView: UITableView) -> Int { TableSection.allCases.count }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        Section(rawValue: section)?.title
+        TableSection(rawValue: section)?.title
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let section = Section(rawValue: section) else { return 0 }
+        guard let section = TableSection(rawValue: section) else { return 0 }
         switch section {
-        case .appAssets: return appAssetItems.count
-        case .spmAssets: return spmAssetItems.count
+        case .appAssets: return viewModel.appAssetItems.count
+        case .spmAssets: return viewModel.spmAssetItems.count
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        guard let section = Section(rawValue: indexPath.section) else { return cell }
+        guard let section = TableSection(rawValue: indexPath.section) else { return cell }
 
         let item: AssetsResource
         let bgColor: UIColor
         switch section {
         case .appAssets:
-            item = appAssetItems[indexPath.row]
+            item = viewModel.appAssetItems[indexPath.row]
             bgColor = .green
         case .spmAssets:
-            item = spmAssetItems[indexPath.row]
+            item = viewModel.spmAssetItems[indexPath.row]
             bgColor = .blue
         }
         
