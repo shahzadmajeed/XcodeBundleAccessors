@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:DesignSystem/DesignSystem">
+      location = "container:../SpmPackage/DesignSystem">
    </FileRef>
    <FileRef
       location = "container:XcodeBundleAccessors.xcodeproj">
